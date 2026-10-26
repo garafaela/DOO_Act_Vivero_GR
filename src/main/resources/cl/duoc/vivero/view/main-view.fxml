@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cl.duoc.vivero.controller.MainViewController">
+   <children>
+      <SplitPane dividerPositions="0.6300223214285715" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.7911073825503354, 0.5" orientation="VERTICAL" prefHeight="400.0" prefWidth="386.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="tablaPlantas" prefHeight="311.0" prefWidth="383.0">
+                                <columns>
+                                  <TableColumn fx:id="colTipo" prefWidth="75.0" text="Tipo" />
+                                  <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                                    <TableColumn fx:id="colAltura" prefWidth="75.0" text="Altura (cm)" />
+                                    <TableColumn fx:id="colCantidad" prefWidth="75.0" text="Cantidad" />
+                                    <TableColumn fx:id="colPrecio" prefWidth="75.0" text="Precio Unit." />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                        <SplitPane dividerPositions="0.6243478260869566" prefHeight="160.0" prefWidth="200.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label fx:id="lblMensaje" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="5.0" prefHeight="63.0" prefWidth="226.0" text="Mensaje" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="9.0" />
+                                       </font></Label>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="73.0" prefWidth="241.0">
+                                 <children>
+                                    <Button fx:id="btnEliminar" layoutX="36.0" layoutY="24.0" mnemonicParsing="false" onAction="#eliminarPlanta" text="Eliminar" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
+            <VBox prefHeight="397.0" prefWidth="221.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="219.0" text="Registro">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <GridPane alignment="CENTER" prefHeight="340.0" prefWidth="184.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.33333333333333" minWidth="0.0" prefWidth="88.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="130.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="txtNombre" prefHeight="25.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtAltura" prefHeight="25.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="Nombre: " textAlignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="109.0" text="Altura (cm): " GridPane.rowIndex="2" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="107.0" text="Cantidad: " GridPane.rowIndex="3" />
+                        <TextField fx:id="txtVolumenMaceta" layoutX="89.0" layoutY="117.0" prefHeight="25.0" prefWidth="87.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="121.0" prefHeight="17.0" prefWidth="107.0" text="Especie: " GridPane.rowIndex="5" />
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="216.0" prefHeight="47.0" prefWidth="91.0" text="Vol. Mac. (L): " textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
+                        <TextField fx:id="txtEspecie" layoutX="89.0" layoutY="165.0" prefHeight="14.0" prefWidth="73.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="chkResisteHeladas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="42.0" prefWidth="113.0" text="¿Resiste Heladas?" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </CheckBox>
+                        <Button fx:id="btnRegistrar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#registrarPlanta" prefHeight="25.0" prefWidth="91.0" text="Registrar" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="cbTipoPlanta" onAction="#activarCamposSegunTipo" prefHeight="25.0" prefWidth="172.0" promptText="Tipo de Planta" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </children></VBox>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

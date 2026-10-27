@@ -47,11 +47,8 @@ public class PlantaRepository {
     public ObservableList<PlantaInterior> cargarPlantasInteriores(){
         Path rutaArchivo = Path.of("interiores.json");
         if (!Files.exists(rutaArchivo)){
-            System.out.println("NO existE");
             return FXCollections.observableArrayList();
         }else{
-            System.out.println("existe");
-
             try {
                 String contenidoArchivo = Files.readString(rutaArchivo);         //acá lee el contenido del JSON
                 Type tipoLista = new TypeToken<ArrayList<PlantaInterior>>(){}.getType();  //acá especifico qué tipo de datos están dentro del JSON

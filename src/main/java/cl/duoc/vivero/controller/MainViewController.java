@@ -110,50 +110,71 @@ public class MainViewController {
             }
 
             Planta newPlanta = null;
-            String nombrePlanta = txtNombre.getText();
-            int alturaPlanta = Integer.parseInt(txtAltura.getText());
-            int cantidadPlanta = Integer.parseInt(txtCantidad.getText());
-
-            if (cbTipoPlanta.getValue().equals("Interior")) {
-                double volumenMaceta = Double.parseDouble(txtVolumenMaceta.getText());
-                newPlanta = new PlantaInterior(nombrePlanta, alturaPlanta, cantidadPlanta, volumenMaceta);
-
-            } else if (cbTipoPlanta.getValue().equals("Exterior")) {
-                String especiePlanta = txtEspecie.getText();
-                boolean resisteHeladas = chkResisteHeladas.isSelected();
-                newPlanta = new PlantaExterior(nombrePlanta, alturaPlanta, cantidadPlanta, especiePlanta, resisteHeladas);
+            if (txtNombre == null || txtCantidad == null || txtAltura == null){
+                lblMensaje.setText("Debe rellenar todos los campos.");
+            }else{
+                String nombrePlanta = txtNombre.getText();
+                int alturaPlanta = Integer.parseInt(txtAltura.getText());
+                int cantidadPlanta = Integer.parseInt(txtCantidad.getText());
+                if (cbTipoPlanta.getValue().equals("Interior")) {
+                    if (txtVolumenMaceta == null){
+                        lblMensaje.setText("Debe rellenar todos los campos.");
+                    }else{
+                        double volumenMaceta = Double.parseDouble(txtVolumenMaceta.getText());
+                        newPlanta = new PlantaInterior(nombrePlanta, alturaPlanta, cantidadPlanta, volumenMaceta);
+                    }
+                } else if (cbTipoPlanta.getValue().equals("Exterior")) {
+                    if (txtEspecie == null || chkResisteHeladas == null){
+                        lblMensaje.setText("Debe rellenar todos los campos.");
+                    }else{
+                        String especiePlanta = txtEspecie.getText();
+                        boolean resisteHeladas = chkResisteHeladas.isSelected();
+                        newPlanta = new PlantaExterior(nombrePlanta, alturaPlanta, cantidadPlanta, especiePlanta, resisteHeladas);
+                    }
+                }
             }
 
             if (newPlanta != null) {
                 plantas.add(newPlanta);
                 limpiarCampos();
                 lblMensaje.setText("¡Planta registrada exitosamente!");
+                actualizarRepositorio();
             }
-
-            List<PlantaInterior> interiores = new ArrayList<>();
-            List<PlantaExterior> exteriores = new ArrayList<>();
-
-            for (Planta p : plantas){
-                if (p instanceof PlantaInterior){
-                    interiores.add((PlantaInterior) p);
-                } else if (p instanceof PlantaExterior) {
-                    exteriores.add((PlantaExterior) p);
-                }
-            }
-            repositorio.agregarPlantasInteriores(interiores);
-            repositorio.agregarPlantasExteriores(exteriores);
-
-        }catch (IllegalArgumentException e){
-            lblMensaje.setText("Error: "+e.getMessage());
+        }catch (NullPointerException e){
+            lblMensaje.setText("Debe rellenar todos los campos. (Error: "+e.getMessage()+")");
         }
     }
 
     @FXML
     public void eliminarPlanta(){
+        Planta seleccion = tablaPlantas.getSelectionModel().getSelectedItem();
 
+        if (seleccion == null){
+            lblMensaje.setText("Debe seleccionar una planta de la tabla para eliminarla.");
+        }else{
+            plantas.remove(seleccion);
+            lblMensaje.setText("¡Planta eliminada exitosamente!");
+            actualizarRepositorio();
+        }
     }
 
+    // ACÁ VALIDO SI EL CAMPO .isEmpty o si no es número (y lo uso validarCampo (txtNombre, "Nombre"))
+    public boolean validarCampo(TextField campo, String nombreCampo){
+        return true;
+    }
 
+    public void actualizarRepositorio(){
+        List<PlantaInterior> interiores = new ArrayList<>();
+        List<PlantaExterior> exteriores = new ArrayList<>();
 
-
+        for (Planta p : plantas){
+            if (p instanceof PlantaInterior){
+                interiores.add((PlantaInterior) p);
+            } else if (p instanceof PlantaExterior) {
+                exteriores.add((PlantaExterior) p);
+            }
+        }
+        repositorio.agregarPlantasInteriores(interiores);
+        repositorio.agregarPlantasExteriores(exteriores);
+    }
 }
